@@ -21,13 +21,13 @@ output_file="$3"
 #mock_output_file="preprocess.txt"
 #count=0
 
-output_filename="${output_file##*.}"
+output_filename="${output_file%.*}"
+output_filename_ext="${output_file##*.}"
 
-if [[ "$output_filename == "fasta" ]]; then
+if [[ "$output_filename_ext == "fasta" ]]; then
 	seqtk subseq $1 $2 > "$output_file"
 else
-	echo "Invalid output file"
-	exit 1
+	seqtk subseq $1 $2 > "$output_filename.$output_filename_ext"
 fi
 
 #blastn -query "${query_file}" -subject "${subject_file}" -task blastn-short -outfmt '6 std sseq' -perc_identity 100 -qcov_hsp_perc 100 -out "${output_file}"
