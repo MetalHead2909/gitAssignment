@@ -8,7 +8,7 @@ tblastn -query $query_file_protein -subject $subject_file_nucleotide -task tblas
 
 output_value=$(awk -F'\t' '{if (($1>30) && ((($2)/($3))>0.9)) print $1}' "$output_file" | wc -l) # |awk '{print $1}' #  > "$output_file
 
-echo $output_value > "$output_file"
+echo $output_value > $output_file
 
 echo $output_value
 
